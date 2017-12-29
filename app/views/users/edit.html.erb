@@ -1,0 +1,17 @@
+<div id="MyModal" class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-body">
+      <h1>Editing User</h1>
+
+      <div class="form-group">
+        <%= render 'form', user: @user %>
+      </div>
+
+      <div class="modal-footer">
+        <%= link_to 'Show', @user %> |
+        <%= link_to 'Back', users_path %>
+      </div>
+     </div>
+  </div>
+</div>
+

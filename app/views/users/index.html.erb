@@ -1,0 +1,87 @@
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edición del Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="form" action="" method="post">
+      <div class="modal-body">
+        <div id="idUSer" style="display: none">
+          <input  type="text" name="id" id="idUser">
+        </div>
+        <div id="name">
+          <input  type="text" name="name" id="nameInput">
+        </div>
+        <p></p>
+        <div id="email" >
+          <input type="text" name="email" id="emailInput">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button id="submit" class="btn btn-primary" type="button" name="submit" value="submit"> <%= link_to 'Guardar Cambios', type: "button" ,class: "forzar_input", method: :index %></button>
+      </div>
+      </form >
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalPostUsers" tabindex="-1" role="dialog" aria-labelledby="modalPostUsers" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">POST DEL USUARIO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">
+        <div id="allPost">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Ver info usuaio', user , class: "btn btn-default"%></td>
+        <td><%= link_to 'Edit Without $Ajax', edit_user_path(user) , class: "btn btn-default"%></td>
+        <td data-toggle="modal" data-target="#exampleModal"><%= link_to 'Edit with $Ajax', '#',  :onclick => "show_user('#{user.id}')", data: { toggle: "modal", target: "#ajax-modal" } %></td>
+        <td><%= link_to 'Eliminar ', user, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-default"%></td>
+        <td data-toggle="modal" data-target="#modalPostUsers"><%= link_to "Ver Post de #{user.name}", '#',  :onclick => "getPostsUser('#{user.id}')", data: { toggle: "modal", target: "#ajax-modal" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>
